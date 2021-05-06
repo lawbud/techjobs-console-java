@@ -66,7 +66,7 @@ public class JobData {
      * @return List of all jobs matching the criteria
      */
     public static ArrayList<HashMap<String, String>> findByColumnAndValue(String column, String value) {
-
+//add the hashmap loop after line line79
         // load data, if not already loaded
         loadData();
 
@@ -83,7 +83,24 @@ public class JobData {
 
         return jobs;
     }
-
+//    public static ArrayList<HashMap<String, String>> findAll(String value) {
+////add the hashmap loop after line line79
+//        // load data, if not already loaded
+//        loadData();
+//
+//        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+//
+//        for (HashMap<String, String> row : allJobs) {
+//
+//            String aValue = row.get(column); THIS LINE IS WRONG
+//
+//            if (aValue.contains(value)) {
+//                jobs.add(row); fix this too.
+//            }
+//        }
+//
+//        return jobs;
+//    }
     /**
      * Read in data from a CSV file and store it in a list
      */
