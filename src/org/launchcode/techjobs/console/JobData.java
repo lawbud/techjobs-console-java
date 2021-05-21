@@ -7,9 +7,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -76,34 +74,37 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toLowerCase(Locale.ROOT).contains(value.toLowerCase(Locale.ROOT))) {
                 jobs.add(row);
             }
         }
 
         return jobs;
     }
-//    public static ArrayList<HashMap<String, String>> findAll(String value) {
-////add the hashmap loop after line line79
-//        // load data, if not already loaded
-//        loadData();
-//
-//        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
-//
-//        for (HashMap<String, String> row : allJobs) {
-//
-//            String aValue = row.get(column); THIS LINE IS WRONG
-//
-//            if (aValue.contains(value)) {
-//                jobs.add(row); fix this too.
-//            }
-//        }
-//
-//        return jobs;
-//    }
-    /**
-     * Read in data from a CSV file and store it in a list
-     */
+    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+
+        loadData();
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        for (HashMap<String, String> row : allJobs) {
+            for (Map.Entry<String, String>  jobLine : row.entrySet()) {
+                String aValue = jobLine.getValue();
+                if (jobs.contains(jobLine)){
+                    continue;
+                }
+                if (aValue.toLowerCase(Locale.ROOT).contains(value.toLowerCase(Locale.ROOT))) {
+                    jobs.add(row);
+
+                }
+            }
+
+        }
+        return jobs;
+    }
+//    /**
+//     * Read in data from a CSV file and store it in a list
+//     */
     private static void loadData() {
 
         // Only load data once
